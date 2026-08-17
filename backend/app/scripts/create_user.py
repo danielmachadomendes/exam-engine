@@ -2,18 +2,27 @@ import getpass
 
 from sqlalchemy import select
 
-from app.db.session import SessionLocal
 from app.core.security import get_password_hash
+from app.db.session import SessionLocal
 from app.models.user import User
 
 
+VALID_ROLES = {"ADMIN", "MANAGER", "LEARNER"}
+
+
 def main():
-    email = input("Admin email: ").strip().lower()
-    full_name = input("Admin full name: ").strip()
-    password = getpass.getpass("Admin password: ")
+    email = input("Email: ").strip().lower()
+    full_name = input("Full name: ").strip()
+    role = input("Role (ADMIN/MANAGER/LEARNER): ").strip().upper()
+    password = getpass.getpass("Password: ")
 
     if not email or not full_name or not password:
         raise ValueError("All fields are required.")
+
+    if role not in VALID_ROLES:
+        raise ValueError(
+            f"Invalid role. Choose one of: {', '.join(VALID_ROLES)}"
+        )
 
     db = SessionLocal()
 
@@ -31,7 +40,7 @@ def main():
             email=email,
             full_name=full_name,
             password_hash=get_password_hash(password),
-            role="ADMIN",
+            role=role,
             is_active=True,
         )
 
@@ -39,7 +48,10 @@ def main():
         db.commit()
         db.refresh(user)
 
-        print(f"Admin created successfully: {user.email}")
+        print(
+            f"User created successfully: "
+            f"{user.email} ({user.role})"
+        )
 
     finally:
         db.close()
