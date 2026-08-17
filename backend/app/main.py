@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.routers import auth
+from app.routers import auth, questions, exams, attempts
 
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -22,6 +22,9 @@ app = FastAPI(
 
 
 app.include_router(auth.router)
+app.include_router(questions.router, prefix="/questions", tags=["questions"])
+app.include_router(exams.router, prefix="/exams", tags=["exams"])
+app.include_router(attempts.router, prefix="/attempts", tags=["attempts"])
 
 
 @app.get("/")
