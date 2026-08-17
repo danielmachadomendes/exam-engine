@@ -1,4 +1,4 @@
-# ServiceNow Exam Engine
+# Exam Engine
 
 Private examination and readiness assessment platform.
 
