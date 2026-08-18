@@ -4,8 +4,7 @@ from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
 
-from app.routers.auth import router as auth_router
-from app.routers.topics import router as topics_router
+from app.routers import auth
 
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -17,17 +16,18 @@ engine = create_engine(
 
 
 app = FastAPI(
-    title="Exam Engine API",
+    title="ServiceNow Exam Engine API",
     version="0.1.0",
 )
 
-app.include_router(auth_router)
-app.include_router(topics_router)
+
+app.include_router(auth.router)
+
 
 @app.get("/")
 def root():
     return {
-        "message": "Exam Engine API is running"
+        "message": "ServiceNow Exam Engine API is running"
     }
 
 
