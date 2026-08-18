@@ -19,7 +19,7 @@ Platform for creating, managing and evaluating certification readiness exams.
 
 The application is currently under development.
 
-Perfeito. Temos então a base do Exam Engine estável:
+Já temos base do Exam Engine estável com:
 
 ✅ FastAPI + Uvicorn  
 ✅ PostgreSQL  
@@ -33,7 +33,7 @@ Perfeito. Temos então a base do Exam Engine estável:
 ✅ Docker Compose funcional  
 ✅ /docs disponível  
 ✅ alembic check sem novas operações  
-Próximo passo: Question Management API  
+**Próximo passo:** Question Management API  
   
 Agora faz sentido começarmos a transformar os models em funcionalidades reais.  
   
@@ -44,6 +44,7 @@ Topics API
 - listar topics  
 - editar  
 - ativar/desativar  
+  
 Questions API  
 - criar pergunta  
 - listar perguntas  
@@ -52,18 +53,21 @@ Questions API
 - ativar/desativar  
 - associar respostas  
 - validação específica para TRUE_FALSE, SINGLE_CHOICE e MULTIPLE_CHOICE  
+  
 Exams API  
 - criar exame  
 - definir número de perguntas  
 - passing score  
 - time limit  
 - associar perguntas  
+  
 Exam attempt  
 - learner inicia exame  
 - responde  
 - submete  
 - sistema calcula score  
 - determina passed  
+    
 Results / dashboard  
 - histórico do learner  
 - resultados  
